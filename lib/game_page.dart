@@ -1,4 +1,4 @@
-  import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // import 'package:math_for_kids/game_info.dart';
 import 'package:math_for_kids/welcome_page.dart';
@@ -12,8 +12,9 @@ class GamePage extends StatefulWidget {
   final String gameMode;
   final int? timeLimit;
 
-  GamePage(
-      {required this.playerName,
+  const GamePage(
+      {super.key,
+      required this.playerName,
       required this.variety,
       required this.gameMode,
       required this.timeLimit});
@@ -58,7 +59,7 @@ class _GamePageState extends State<GamePage> {
       //timeRemaining = 120;
       timeRemaining = widget.timeLimit ?? 120;
       // Start the timer
-      timer = Timer.periodic(Duration(seconds: 1), (Timer t) {
+      timer = Timer.periodic(const Duration(seconds: 1), (Timer t) {
         setState(() {
           if (timeRemaining > 0) {
             timeRemaining--;
@@ -78,7 +79,7 @@ class _GamePageState extends State<GamePage> {
   }
 
   void startSpeedModeTimer() {
-    speedModeTimer = Timer.periodic(Duration(seconds: 1), (Timer t) {
+    speedModeTimer = Timer.periodic(const Duration(seconds: 1), (Timer t) {
       setState(() {
         if (speedModeTimeRemaining > 0) {
           speedModeTimeRemaining--;
@@ -92,14 +93,14 @@ class _GamePageState extends State<GamePage> {
 
   void increaseDifficulty() {
     setState(() {
-      flashcards.forEach((flashcard) {
+      for (var flashcard in flashcards) {
         // Increase operands for all flashcards
         flashcard.operand1 += 100; // Adjust the increment as needed
         flashcard.operand2 += 100; // Adjust the increment as needed
         flashcard.setCorrectAnswer();
         flashcard.possibleAnswers =
             flashcard.generatePossibleAnswers(flashcard.correctAnswer);
-      });
+      }
     });
   }
 
@@ -185,9 +186,9 @@ class _GamePageState extends State<GamePage> {
 
   bool hasShownResults = false;
   void showResults({bool bySurrender = false}) {
-      if (hasShownResults) {
-    // Results have already been shown, avoid showing them again
-    return;
+    if (hasShownResults) {
+      // Results have already been shown, avoid showing them again
+      return;
     }
     setState(() {
       isTimeUp = true;
@@ -210,7 +211,7 @@ class _GamePageState extends State<GamePage> {
         return AlertDialog(
           title: Text(
             'Congratulations, ${widget.playerName}!',
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 24,
               fontFamily: 'BubblegumSans',
@@ -219,7 +220,7 @@ class _GamePageState extends State<GamePage> {
           content: Column(
             mainAxisSize: MainAxisSize.min, // Set to min to adjust size
             children: [
-              Text(
+              const Text(
                 'GOOD GAME!',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -227,19 +228,19 @@ class _GamePageState extends State<GamePage> {
                   fontFamily: 'BubblegumSans',
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 'Your final score: $score',
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 24,
                   fontFamily: 'BubblegumSans',
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 'Remarks: $remarks',
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 24,
                   fontFamily: 'BubblegumSans',
@@ -263,9 +264,10 @@ class _GamePageState extends State<GamePage> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFFFFA500), // Orange button color
+                    backgroundColor:
+                        const Color(0xFFFFA500), // Orange button color
                   ),
-                  child: Text(
+                  child: const Text(
                     'PLAY AGAIN',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -285,9 +287,10 @@ class _GamePageState extends State<GamePage> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFFFFA500), // Orange button color
+                    backgroundColor:
+                        const Color(0xFFFFA500), // Orange button color
                   ),
-                  child: Text(
+                  child: const Text(
                     'HOME',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -299,7 +302,8 @@ class _GamePageState extends State<GamePage> {
               ],
             ),
           ],
-          contentPadding: EdgeInsets.all(16.0), // Adjust padding as needed
+          contentPadding:
+              const EdgeInsets.all(16.0), // Adjust padding as needed
         );
       },
     );
@@ -330,7 +334,7 @@ class _GamePageState extends State<GamePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/bg2.png'),
             fit: BoxFit.cover,
@@ -338,16 +342,16 @@ class _GamePageState extends State<GamePage> {
         ),
         child: Center(
           child: Card(
-            margin: EdgeInsets.all(10),
-            color: Color.fromRGBO(
+            margin: const EdgeInsets.all(10),
+            color: const Color.fromRGBO(
                 38, 148, 221, 0.493), // Light Blue background color
             child: Padding(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 children: [
                   Expanded(
                     child: Container(
-                      margin: EdgeInsets.all(10),
+                      margin: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         color: Colors.greenAccent,
                         borderRadius: BorderRadius.circular(10),
@@ -360,7 +364,7 @@ class _GamePageState extends State<GamePage> {
                             children: [
                               Text(
                                 'FLASHCARD NO. ${currentFlashcardIndex + 1}',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'BubblegumSans',
@@ -368,10 +372,10 @@ class _GamePageState extends State<GamePage> {
                                       0xFF001F3F), // Dark Navy Blue text color
                                 ),
                               ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               Text(
                                 '${flashcards[currentFlashcardIndex].operand1} ${getOperatorSymbol(flashcards[currentFlashcardIndex].variety)} ${flashcards[currentFlashcardIndex].operand2}',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 28,
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'BubblegumSans',
@@ -385,7 +389,7 @@ class _GamePageState extends State<GamePage> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   // Conditional rendering based on game mode
                   widget.gameMode == 'Infinite'
                       ? TextField(
@@ -402,12 +406,12 @@ class _GamePageState extends State<GamePage> {
                             checkAnswer(int.parse(value));
                             answerController.clear(); // Clear the TextField
                           },
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 25,
                             color: Color.fromARGB(255, 255, 255, 255),
                           ),
                           textAlign: TextAlign.center,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelText: 'Enter your answer here and press Enter',
                             labelStyle: TextStyle(
                               fontSize: 25,
@@ -421,7 +425,7 @@ class _GamePageState extends State<GamePage> {
                           // GridView for multiple choice buttons
                           shrinkWrap: true,
                           gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
+                              const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount:
                                 6, // Set crossAxisCount to 6 for a horizontal line
                             crossAxisSpacing: 10.0,
@@ -432,7 +436,8 @@ class _GamePageState extends State<GamePage> {
                               .length,
                           itemBuilder: (context, index) => Card(
                             elevation: 3,
-                            color: Color(0xFF006400), // Orange button color
+                            color:
+                                const Color(0xFF006400), // Orange button color
                             child: InkWell(
                               onTap: () => checkAnswer(
                                   flashcards[currentFlashcardIndex]
@@ -442,7 +447,7 @@ class _GamePageState extends State<GamePage> {
                                   flashcards[currentFlashcardIndex]
                                       .possibleAnswers[index]
                                       .toString(),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 25,
                                     fontFamily: 'BubblegumSans',
                                     color: Color.fromARGB(255, 247, 247,
@@ -454,10 +459,11 @@ class _GamePageState extends State<GamePage> {
                           ),
                         ),
 
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
 // Improved Score Board Design
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
@@ -466,7 +472,7 @@ class _GamePageState extends State<GamePage> {
                           color: Colors.grey.withOpacity(0.5),
                           spreadRadius: 2,
                           blurRadius: 5,
-                          offset: Offset(0, 3),
+                          offset: const Offset(0, 3),
                         ),
                       ],
                     ),
@@ -480,7 +486,7 @@ class _GamePageState extends State<GamePage> {
                           children: [
                             Column(
                               children: [
-                                Text(
+                                const Text(
                                   'Score/Over',
                                   style: TextStyle(
                                     fontSize: 16,
@@ -491,7 +497,7 @@ class _GamePageState extends State<GamePage> {
                                 ),
                                 Text(
                                   '$score/$currentFlashcardIndex',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 24,
                                     fontWeight: FontWeight.bold,
                                     fontFamily: 'BubblegumSans',
@@ -511,19 +517,19 @@ class _GamePageState extends State<GamePage> {
                                     widget.gameMode == 'Single Level'
                                         ? 'Time'
                                         : 'Time Remaining',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
                                       fontFamily: 'BubblegumSans',
                                       color: Color(0xFF001F3F),
                                     ),
                                   ),
-                                  SizedBox(width: 10),
+                                  const SizedBox(width: 10),
                                   Text(
                                     widget.gameMode == 'Single Level'
                                         ? '$timeRemaining'
                                         : '$speedModeTimeRemaining',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 24,
                                       fontWeight: FontWeight.bold,
                                       fontFamily: 'BubblegumSans',
@@ -540,7 +546,7 @@ class _GamePageState extends State<GamePage> {
                     ),
                   ),
 
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   //if (widget.gameMode == 'Infinite')
                   ElevatedButton(
                     onPressed: () {
@@ -552,8 +558,8 @@ class _GamePageState extends State<GamePage> {
                       backgroundColor:
                           Colors.orange, // Orange surrender button color
                       foregroundColor: Colors.white,
-                      padding: EdgeInsets.all(15),
-                      textStyle: TextStyle(
+                      padding: const EdgeInsets.all(15),
+                      textStyle: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'BubblegumSans',
@@ -562,7 +568,7 @@ class _GamePageState extends State<GamePage> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
-                    child: Text('SURRENDER'),
+                    child: const Text('SURRENDER'),
                   ),
                 ],
               ),

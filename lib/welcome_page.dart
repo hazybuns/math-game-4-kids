@@ -3,19 +3,21 @@ import 'package:flutter/material.dart';
 import 'variety_page.dart';
 
 class WelcomePage extends StatefulWidget {
+  const WelcomePage({super.key});
+
   @override
   _WelcomePageState createState() => _WelcomePageState();
 }
 
 class _WelcomePageState extends State<WelcomePage> {
-  TextEditingController _nameController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       //backgroundColor: Color(0xFFFF80),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/bg2.png'),
             fit: BoxFit.cover,
@@ -24,7 +26,7 @@ class _WelcomePageState extends State<WelcomePage> {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Card(
-            color: Color.fromRGBO(38, 148, 221, 0.493),
+            color: const Color.fromRGBO(38, 148, 221, 0.493),
             elevation: 5,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12.0),
@@ -35,7 +37,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
+                    SizedBox(
                       height: 100,
                       width: 100,
                       child: Image.asset(
@@ -43,34 +45,35 @@ class _WelcomePageState extends State<WelcomePage> {
                         fit: BoxFit.contain,
                       ),
                     ),
-                    SizedBox(height: 30.0),
-                    Text(
+                    const SizedBox(height: 30.0),
+                    const Text(
                       'WELCOME TO THE MATH FLASHCARDS GAME!',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.normal,
                         fontFamily: 'BubblegumSans',
-                        color:Color(0xFF001F3F),
+                        color: Color(0xFF001F3F),
                       ),
                     ),
-                    SizedBox(height: 30.0),
-                    Container(
+                    const SizedBox(height: 30.0),
+                    SizedBox(
                       width: 300,
                       child: TextField(
                         controller: _nameController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: 'ENTER YOUR NAME',
                           labelStyle: TextStyle(
-                            color:Color(0xFF001F3F), // Dark Navy Blue text color
+                            color:
+                                Color(0xFF001F3F), // Dark Navy Blue text color
                             fontFamily: 'BubblegumSans',
                             fontSize: 20,
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(height: 30.0),
-                    Container(
+                    const SizedBox(height: 30.0),
+                    SizedBox(
                       height: 50,
                       width: 90,
                       child: ElevatedButton(
@@ -88,19 +91,19 @@ class _WelcomePageState extends State<WelcomePage> {
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              Color(0xFFFFA500),// Dark Green button color
-                          foregroundColor: Color(0xFF001F3F),
-                          padding: EdgeInsets.all(15),
-                          textStyle: TextStyle(
+                          backgroundColor: const Color(
+                              0xFFFFA500), // Dark Green button color
+                          foregroundColor: const Color(0xFF001F3F),
+                          padding: const EdgeInsets.all(15),
+                          textStyle: const TextStyle(
                             fontSize: 18,
                             fontFamily: 'BubblegumSans',
-                            ),
+                          ),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                         ),
-                        child: Text('START'),
+                        child: const Text('START'),
                       ),
                     ),
                   ],

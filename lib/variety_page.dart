@@ -4,21 +4,41 @@ import 'game_mode_page.dart';
 class VarietyPage extends StatelessWidget {
   final String playerName;
 
-  VarietyPage({required this.playerName});
+  VarietyPage({super.key, required this.playerName});
 
   final List<Map<String, dynamic>> flashcardVarieties = [
-    {'variety': 'Addition', 'image': 'assets/images/add2.png', 'color': Colors.transparent},
-    {'variety': 'Subtraction', 'image': 'assets/images/sub2.png', 'color': Colors.transparent},
-    {'variety': 'Multiplication', 'image': 'assets/images/mult2.png', 'color': Colors.transparent},
-    {'variety': 'Division', 'image': 'assets/images/div2.png', 'color': Colors.transparent},
-    {'variety': 'Combined', 'image': 'assets/images/ycomb.png', 'color': Colors.transparent},
+    {
+      'variety': 'Addition',
+      'image': 'assets/images/add2.png',
+      'color': Colors.transparent
+    },
+    {
+      'variety': 'Subtraction',
+      'image': 'assets/images/sub2.png',
+      'color': Colors.transparent
+    },
+    {
+      'variety': 'Multiplication',
+      'image': 'assets/images/mult2.png',
+      'color': Colors.transparent
+    },
+    {
+      'variety': 'Division',
+      'image': 'assets/images/div2.png',
+      'color': Colors.transparent
+    },
+    {
+      'variety': 'Combined',
+      'image': 'assets/images/ycomb.png',
+      'color': Colors.transparent
+    },
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/bg2.png'),
             fit: BoxFit.cover,
@@ -27,7 +47,7 @@ class VarietyPage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Card(
-            color: Color.fromRGBO(38, 148, 221, 0.493),
+            color: const Color.fromRGBO(38, 148, 221, 0.493),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Center(
@@ -37,7 +57,7 @@ class VarietyPage extends StatelessWidget {
                   children: [
                     Text(
                       'Hello, $playerName! PLEASE SELECT A CATEGORY OF FLASHCARDS TO PLAY!',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 26,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'BubblegumSans',
@@ -45,9 +65,10 @@ class VarietyPage extends StatelessWidget {
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(height: 20.0),
+                    const SizedBox(height: 20.0),
                     GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
                         mainAxisSpacing: 10.0,
                         crossAxisSpacing: 10.0,
@@ -70,7 +91,7 @@ class VarietyPage extends StatelessWidget {
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: flashcardVarieties[index]['color'],
-                            padding: EdgeInsets.all(15),
+                            padding: const EdgeInsets.all(15),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8.0),
                             ),

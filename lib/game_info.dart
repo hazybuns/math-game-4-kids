@@ -2,18 +2,20 @@ import 'package:flutter/material.dart';
 // import 'package:math_for_kids/welcome_page.dart';
 
 class GameInfoPage extends StatelessWidget {
+  const GameInfoPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/math4kids.jpg'),
             fit: BoxFit.cover,
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
+        child: const Padding(
+          padding: EdgeInsets.all(16.0),
           child: Card(
             color: Color.fromRGBO(179, 225, 255, 0.884),
             child: Column(
@@ -32,7 +34,10 @@ class GameInfoPage extends StatelessWidget {
                 SizedBox(height: 8),
                 Text(
                   'The game consists of four varieties: Addition, Subtraction, Multiplication, and Division. Each variety presents different mathematical operations for you to solve.',
-                  style: TextStyle(fontSize: 16, fontFamily: 'BubblegumSans',),
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'BubblegumSans',
+                  ),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 16),
@@ -47,7 +52,10 @@ class GameInfoPage extends StatelessWidget {
                 SizedBox(height: 8),
                 Text(
                   'The game offers two modes: Single Level and Infinite. In Single Level mode, you have a limited time to answer as many flashcards as you can. In Infinite mode, you can continue playing without a time limit.',
-                  style: TextStyle(fontSize: 16, fontFamily: 'BubblegumSans',),
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'BubblegumSans',
+                  ),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 16),
@@ -62,7 +70,10 @@ class GameInfoPage extends StatelessWidget {
                 SizedBox(height: 8),
                 Text(
                   'Answer the mathematical questions presented on the flashcards. For Single Level mode, try to answer as many as you can before the time runs out. For Infinite mode, you can play at your own pace without any time constraints.',
-                  style: TextStyle(fontSize: 16, fontFamily: 'BubblegumSans',),
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'BubblegumSans',
+                  ),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 16),

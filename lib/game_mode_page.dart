@@ -5,13 +5,14 @@ class GameModePage extends StatelessWidget {
   final String playerName;
   final String variety;
 
-  GameModePage({required this.playerName, required this.variety});
+  const GameModePage(
+      {super.key, required this.playerName, required this.variety});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/bg2.png'),
             fit: BoxFit.cover,
@@ -20,14 +21,14 @@ class GameModePage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Card(
-            color: Color.fromRGBO(38, 148, 221, 0.493),
+            color: const Color.fromRGBO(38, 148, 221, 0.493),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       'CHOOSE A GAME MODE:',
                       style: TextStyle(
                         fontSize: 30,
@@ -37,7 +38,7 @@ class GameModePage extends StatelessWidget {
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(height: 20.0),
+                    const SizedBox(height: 20.0),
                     _buildGameModeButton(
                       context,
                       playerName,
@@ -45,7 +46,7 @@ class GameModePage extends StatelessWidget {
                       'Timer Mode',
                       'assets/images/timed_mode.jpg', // Replace with your image path
                     ),
-                    SizedBox(height: 10.0),
+                    const SizedBox(height: 10.0),
                     _buildGameModeButton(
                       context,
                       playerName,
@@ -53,7 +54,7 @@ class GameModePage extends StatelessWidget {
                       'Infinite',
                       'assets/images/inf.jpg', // Replace with your image path
                     ),
-                    SizedBox(height: 10.0),
+                    const SizedBox(height: 10.0),
                     _buildGameModeButton(
                       context,
                       playerName,
@@ -71,14 +72,9 @@ class GameModePage extends StatelessWidget {
     );
   }
 
-  Widget _buildGameModeButton(
-    BuildContext context,
-    String playerName,
-    String variety,
-    String gameMode,
-    String backgroundImage,
-    {Color backgroundColor = Colors.transparent}
-  ) {
+  Widget _buildGameModeButton(BuildContext context, String playerName,
+      String variety, String gameMode, String backgroundImage,
+      {Color backgroundColor = Colors.transparent}) {
     return Card(
       color: Colors.transparent,
       elevation: 0, // No shadow
@@ -122,7 +118,8 @@ class GameModePage extends StatelessWidget {
                   builder: (context) => GamePage(
                     playerName: playerName,
                     variety: variety,
-                    gameMode: 'Speed Mode', timeLimit: null,
+                    gameMode: 'Speed Mode',
+                    timeLimit: null,
                   ),
                 ),
               );
@@ -134,7 +131,7 @@ class GameModePage extends StatelessWidget {
                   builder: (context) => GamePage(
                     playerName: playerName,
                     variety: variety,
-                    gameMode: gameMode, 
+                    gameMode: gameMode,
                     timeLimit: null,
                   ),
                 ),
@@ -144,14 +141,14 @@ class GameModePage extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             backgroundColor: backgroundColor,
             foregroundColor: Colors.white,
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16.0),
             ),
           ),
           child: Text(
             gameMode.toUpperCase(),
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 25,
               fontFamily: 'BubblegumSans',
               fontWeight: FontWeight.bold,
@@ -169,14 +166,14 @@ class GameModePage extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(
+          title: const Text(
             'Select Time Limit:',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontFamily: 'BubblegumSans',
             ),
           ),
-          content: Container(
+          content: SizedBox(
             width: double.maxFinite,
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -185,12 +182,12 @@ class GameModePage extends StatelessWidget {
                   selectedTimeLimit = 60;
                   Navigator.pop(context);
                 }),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 _buildTimerSelectionCard(context, '2 MINUTES', () {
                   selectedTimeLimit = 120;
                   Navigator.pop(context);
                 }),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 _buildTimerSelectionCard(context, '3 MINUTES', () {
                   selectedTimeLimit = 180;
                   Navigator.pop(context);
@@ -216,15 +213,15 @@ class GameModePage extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.0),
-            color: Color.fromRGBO(38, 148, 221, 0.493),
+            color: const Color.fromRGBO(38, 148, 221, 0.493),
           ),
           child: Center(
             child: Text(
               label,
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontFamily: 'BubblegumSans',
                 fontSize: 20,

@@ -4,13 +4,13 @@ class ResultsPage extends StatelessWidget {
   final String playerName;
   final int score;
 
-  ResultsPage({required this.playerName, required this.score});
+  const ResultsPage({super.key, required this.playerName, required this.score});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Results'),
+        title: const Text('Results'),
       ),
       body: Center(
         child: Column(
@@ -22,7 +22,7 @@ class ResultsPage extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context); // Go back to the welcome page
               },
-              child: Text('Play Again'),
+              child: const Text('Play Again'),
             ),
           ],
         ),
