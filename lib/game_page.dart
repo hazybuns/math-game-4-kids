@@ -282,7 +282,7 @@ class _GamePageState extends State<GamePage> {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => WelcomePage(),
+                        builder: (context) => const WelcomePage(),
                       ),
                     );
                   },
