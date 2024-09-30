@@ -10,27 +10,27 @@ class VarietyPage extends StatelessWidget {
     {
       'variety': 'Addition',
       'image': 'assets/images/add2.png',
-      'color': Colors.transparent
+      'color': Colors.green.shade200
     },
     {
       'variety': 'Subtraction',
       'image': 'assets/images/sub2.png',
-      'color': Colors.transparent
+      'color': Colors.red.shade200
     },
     {
       'variety': 'Multiplication',
       'image': 'assets/images/mult2.png',
-      'color': Colors.transparent
+      'color': Colors.blue.shade200
     },
     {
       'variety': 'Division',
       'image': 'assets/images/div2.png',
-      'color': Colors.transparent
+      'color': Colors.orange.shade200
     },
     {
       'variety': 'Combined',
       'image': 'assets/images/ycomb.png',
-      'color': Colors.transparent
+      'color': Colors.purple.shade200
     },
   ];
 
@@ -44,41 +44,51 @@ class VarietyPage extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Card(
-            color: const Color.fromRGBO(38, 148, 221, 0.493),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Hello, $playerName! PLEASE SELECT A CATEGORY OF FLASHCARDS TO PLAY!',
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                Card(
+                  elevation: 8,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  color: Colors.white.withOpacity(0.9),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(
+                      'Hello, $playerName!\nPLEASE SELECT A CATEGORY OF FLASHCARDS TO PLAY!',
                       style: const TextStyle(
-                        fontSize: 26,
+                        fontSize: 24,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'BubblegumSans',
                         color: Color(0xFF001F3F),
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    const SizedBox(height: 20.0),
-                    GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        mainAxisSpacing: 10.0,
-                        crossAxisSpacing: 10.0,
-                        childAspectRatio: 1.0,
-                      ),
-                      itemCount: flashcardVarieties.length,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        return ElevatedButton(
-                          onPressed: () {
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Expanded(
+                  child: GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 15.0,
+                      crossAxisSpacing: 15.0,
+                      childAspectRatio: 0.9,
+                    ),
+                    itemCount: flashcardVarieties.length,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        elevation: 5,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        color: flashcardVarieties[index]['color'],
+                        child: InkWell(
+                          onTap: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -89,24 +99,32 @@ class VarietyPage extends StatelessWidget {
                               ),
                             );
                           },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: flashcardVarieties[index]['color'],
-                            padding: const EdgeInsets.all(15),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                flashcardVarieties[index]['image'],
+                                width: 100,
+                                height: 100,
+                              ),
+                              const SizedBox(height: 10),
+                              Text(
+                                flashcardVarieties[index]['variety'],
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'BubblegumSans',
+                                  color: Color(0xFF001F3F),
+                                ),
+                              ),
+                            ],
                           ),
-                          child: Image.asset(
-                            flashcardVarieties[index]['image'],
-                            width: 130,
-                            height: 130,
-                          ),
-                        );
-                      },
-                    ),
-                  ],
+                        ),
+                      );
+                    },
+                  ),
                 ),
-              ),
+              ],
             ),
           ),
         ),

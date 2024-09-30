@@ -93,10 +93,24 @@ class _GamePageState extends State<GamePage> {
 
   void increaseDifficulty() {
     setState(() {
+      int difficultyFactor =
+          (score ~/ 10) + 1; // Increase difficulty every 10 points
       for (var flashcard in flashcards) {
-        // Increase operands for all flashcards
-        flashcard.operand1 += 100; // Adjust the increment as needed
-        flashcard.operand2 += 100; // Adjust the increment as needed
+        switch (flashcard.variety) {
+          case 'Addition':
+          case 'Subtraction':
+            flashcard.operand1 += 3 * difficultyFactor;
+            flashcard.operand2 += 2 * difficultyFactor;
+            break;
+          case 'Multiplication':
+            flashcard.operand1 += 1 * difficultyFactor;
+            flashcard.operand2 += 1 * difficultyFactor;
+            break;
+          case 'Division':
+            flashcard.operand1 += 3 * difficultyFactor;
+            flashcard.operand2 += 1 * difficultyFactor;
+            break;
+        }
         flashcard.setCorrectAnswer();
         flashcard.possibleAnswers =
             flashcard.generatePossibleAnswers(flashcard.correctAnswer);
@@ -120,33 +134,16 @@ class _GamePageState extends State<GamePage> {
   }
 
   void checkAnswer(int selectedAnswer) {
-    int correctAnswer;
-
-    switch (flashcards[currentFlashcardIndex].variety) {
-      case 'Addition':
-        correctAnswer = flashcards[currentFlashcardIndex].operand1 +
-            flashcards[currentFlashcardIndex].operand2;
-        break;
-      case 'Subtraction':
-        correctAnswer = flashcards[currentFlashcardIndex].operand1 -
-            flashcards[currentFlashcardIndex].operand2;
-        break;
-      case 'Multiplication':
-        correctAnswer = flashcards[currentFlashcardIndex].operand1 *
-            flashcards[currentFlashcardIndex].operand2;
-        break;
-      case 'Division':
-        correctAnswer = flashcards[currentFlashcardIndex].operand1 ~/
-            flashcards[currentFlashcardIndex].operand2;
-        break;
-      default:
-        // Handle unknown variety (optional)
-        correctAnswer = 0;
-    }
+    int correctAnswer =
+        calculateCorrectAnswer(flashcards[currentFlashcardIndex]);
 
     if (selectedAnswer == correctAnswer) {
       setState(() {
         score++;
+        if (score % 5 == 0) {
+          increaseDifficulty();
+        }
+        updateGameDifficulty();
       });
     } else {
       // If the answer is incorrect and the game mode is "Speed Mode", end the game immediately
@@ -159,7 +156,6 @@ class _GamePageState extends State<GamePage> {
     // Reset the timer for the flashcard
     if (widget.gameMode == 'Single Level') {
       if (isTimeUp) {
-        // Only reset the timer for single level if time is up
         setState(() {
           timeRemaining = widget.timeLimit ?? 120;
         });
@@ -170,6 +166,21 @@ class _GamePageState extends State<GamePage> {
       });
     }
     goToNextFlashcard();
+  }
+
+  int calculateCorrectAnswer(Flashcard flashcard) {
+    switch (flashcard.variety) {
+      case 'Addition':
+        return flashcard.operand1 + flashcard.operand2;
+      case 'Subtraction':
+        return flashcard.operand1 - flashcard.operand2;
+      case 'Multiplication':
+        return flashcard.operand1 * flashcard.operand2;
+      case 'Division':
+        return flashcard.operand1 ~/ flashcard.operand2;
+      default:
+        return 0;
+    }
   }
 
   void goToNextFlashcard() {
@@ -319,6 +330,25 @@ class _GamePageState extends State<GamePage> {
       return 'Good job, ${widget.playerName}!';
     } else {
       return 'Nice try, do better next time, ${widget.playerName}!';
+    }
+  }
+
+  void updateGameDifficulty() {
+    if (widget.gameMode == 'Infinite' && score >= 20 && !isTimeUp) {
+      // Start a timer for Infinite mode after score reaches 20
+      if (timer == null || !timer.isActive) {
+        timeRemaining = 30; // Give 30 seconds
+        timer = Timer.periodic(const Duration(seconds: 1), (Timer t) {
+          setState(() {
+            if (timeRemaining > 0) {
+              timeRemaining--;
+            } else {
+              timer.cancel();
+              showResults();
+            }
+          });
+        });
+      }
     }
   }
 
@@ -579,115 +609,3 @@ class _GamePageState extends State<GamePage> {
     );
   }
 }
-
-
-
-
-
-      // bottomNavigationBar: BottomAppBar(
-      //   color: Color(0xFFADD8E6), // Dark Navy Blue bottom bar color
-      //   child: Container(
-      //     height: 60.0,
-      //     padding: EdgeInsets.symmetric(
-      //         horizontal: 20.0), // Adjusted horizontal padding
-      //     child: Row(
-      //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //       children: [
-      //         ElevatedButton(
-      //           onPressed: () {
-      //             Navigator.push(
-      //               context,
-      //               MaterialPageRoute(
-      //                 builder: (context) => WelcomePage(),
-      //               ),
-      //             );
-      //           },
-      //           style: ElevatedButton.styleFrom(
-      //             backgroundColor: Color(0xFFADD8E6), // Dark Green button color
-      //             shape: RoundedRectangleBorder(
-      //               borderRadius: BorderRadius.circular(8.0),
-      //             ),
-      //             padding: EdgeInsets.all(15.0), // Adjusted button padding
-      //           ),
-      //           child: Column(
-      //             children: [
-      //               Icon(
-      //                 Icons.home,
-      //                 color: Color(0xFF001F3F),
-      //                 size: 24.0, // Adjusted icon size
-      //               ),
-      //               Text(
-      //                 'Home',
-      //                 style: TextStyle(
-      //                   fontSize: 12.0, // Adjusted text size
-      //                   color: Color(0xFF001F3F),
-      //                 ),
-      //               ),
-      //             ],
-      //           ),
-      //         ),
-      //         ElevatedButton(
-      //           onPressed: () {
-      //             Navigator.push(
-      //               context,
-      //               MaterialPageRoute(
-      //                 builder: (context) => GameInfoPage(),
-      //               ),
-      //             );
-      //           },
-      //           style: ElevatedButton.styleFrom(
-      //             backgroundColor: Color(0xFFADD8E6), // Light Blue button color
-      //             shape: RoundedRectangleBorder(
-      //               borderRadius: BorderRadius.circular(8.0),
-      //             ),
-      //             padding: EdgeInsets.all(15.0), // Adjusted button padding
-      //           ),
-      //           child: Column(
-      //             children: [
-      //               Icon(
-      //                 Icons.info,
-      //                 color: Color(0xFF001F3F),
-      //                 size: 24.0, // Adjusted icon size
-      //               ),
-      //               Text(
-      //                 'Game Info',
-      //                 style: TextStyle(
-      //                   fontSize: 12.0, // Adjusted text size
-      //                   color: Color(0xFF001F3F),
-      //                 ),
-      //               ),
-      //             ],
-      //           ),
-      //         ),
-      //         ElevatedButton(
-      //           onPressed: () {
-      //             Navigator.pop(context); // Navigate back to the previous page
-      //           },
-      //           style: ElevatedButton.styleFrom(
-      //             backgroundColor: Color(0xFFADD8E6), // Dark Green button color
-      //             shape: RoundedRectangleBorder(
-      //               borderRadius: BorderRadius.circular(8.0),
-      //             ),
-      //             padding: EdgeInsets.all(15.0), // Adjusted button padding
-      //           ),
-      //           child: Column(
-      //             children: [
-      //               Icon(
-      //                 Icons.arrow_back,
-      //                 color: Color(0xFF001F3F),
-      //                 size: 24.0, // Adjusted icon size
-      //               ),
-      //               Text(
-      //                 'Back',
-      //                 style: TextStyle(
-      //                   fontSize: 12.0, // Adjusted text size
-      //                   color: Color(0xFF001F3F),
-      //                 ),
-      //               ),
-      //             ],
-      //           ),
-      //         ),
-      //       ],
-      //     ),
-      //   ),
-      // ),

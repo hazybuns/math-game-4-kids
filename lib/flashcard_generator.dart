@@ -7,7 +7,8 @@ class Flashcard {
   List<int> possibleAnswers;
   String variety;
 
-  Flashcard({required this.operand1, required this.operand2, required this.variety})
+  Flashcard(
+      {required this.operand1, required this.operand2, required this.variety})
       : correctAnswer = 0,
         possibleAnswers = [] {
     setCorrectAnswer();
@@ -48,6 +49,40 @@ class Flashcard {
     possibleAnswers.shuffle();
     return possibleAnswers;
   }
+
+  void generateAdvancedQuestion(int difficultyFactor) {
+    Random random = Random();
+    switch (variety) {
+      case 'Addition':
+        if (difficultyFactor > 3 && random.nextBool()) {
+          // Introduce triple addition for higher difficulties
+          int operand3 = random.nextInt(20) + 1;
+          operand1 = (operand1 + operand3) * difficultyFactor;
+          correctAnswer = operand1 + operand2 + operand3;
+        }
+        break;
+      case 'Multiplication':
+        if (difficultyFactor > 2 && random.nextBool()) {
+          // Introduce simple square numbers
+          operand1 = random.nextInt(12) + 1;
+          operand2 = operand1;
+          correctAnswer = operand1 * operand2;
+        }
+        break;
+      case 'Division':
+        if (difficultyFactor > 3 && random.nextBool()) {
+          // Introduce remainders for higher difficulties
+          int dividend = (random.nextInt(50) + 50) * difficultyFactor;
+          int divisor = random.nextInt(10) + 2;
+          operand1 = dividend;
+          operand2 = divisor;
+          correctAnswer = dividend ~/ divisor;
+        }
+        break;
+      default:
+        break;
+    }
+  }
 }
 
 List<Flashcard> generateAdditionFlashcards(int numberOfFlashcards) {
@@ -57,7 +92,8 @@ List<Flashcard> generateAdditionFlashcards(int numberOfFlashcards) {
     int operand1 = Random().nextInt(100) + 1;
     int operand2 = Random().nextInt(100) + 1;
 
-    flashcards.add(Flashcard(operand1: operand1, operand2: operand2, variety: 'Addition'));
+    flashcards.add(
+        Flashcard(operand1: operand1, operand2: operand2, variety: 'Addition'));
   }
 
   return flashcards;
@@ -70,7 +106,8 @@ List<Flashcard> generateSubtractionFlashcards(int numberOfFlashcards) {
     int operand1 = Random().nextInt(100) + 1;
     int operand2 = Random().nextInt(operand1) + 1;
 
-    flashcards.add(Flashcard(operand1: operand1, operand2: operand2, variety: 'Subtraction'));
+    flashcards.add(Flashcard(
+        operand1: operand1, operand2: operand2, variety: 'Subtraction'));
   }
 
   return flashcards;
@@ -83,7 +120,8 @@ List<Flashcard> generateMultiplicationFlashcards(int numberOfFlashcards) {
     int operand1 = Random().nextInt(10) + 1; // Keep the range smaller if needed
     int operand2 = Random().nextInt(10) + 1;
 
-    flashcards.add(Flashcard(operand1: operand1, operand2: operand2, variety: 'Multiplication'));
+    flashcards.add(Flashcard(
+        operand1: operand1, operand2: operand2, variety: 'Multiplication'));
   }
 
   return flashcards;
@@ -97,7 +135,8 @@ List<Flashcard> generateDivisionFlashcards(int numberOfFlashcards) {
     int result = Random().nextInt(10) + 1;
     int operand1 = divisor * result;
 
-    flashcards.add(Flashcard(operand1: operand1, operand2: divisor, variety: 'Division'));
+    flashcards.add(
+        Flashcard(operand1: operand1, operand2: divisor, variety: 'Division'));
   }
 
   return flashcards;
@@ -122,6 +161,3 @@ List<Flashcard> generateCombinedFlashcards(int numberOfFlashcards) {
 
   return flashcards;
 }
-
-
-
