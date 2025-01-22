@@ -63,14 +63,6 @@ Math Flashcards for Kids is an engaging and educational Flutter application desi
    flutter run
    ```
 
-## Dependencies
-
-This project uses the following dependencies:
-
-- yaml:pubspec.yaml
-- startLine: 9
-- endLine: 16
-
 ## Assets
 
 The game uses custom fonts and images. Make sure you have the following assets in your project:
@@ -82,10 +74,6 @@ The game uses custom fonts and images. Make sure you have the following assets i
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
-
 ## Credits
 
-Developed by Venz Jan A. Cabonegro
+Developed by buns
