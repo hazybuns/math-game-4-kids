@@ -73,7 +73,3 @@ The game uses custom fonts and images. Make sure you have the following assets i
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
-
-## Credits
-
-Developed by buns
