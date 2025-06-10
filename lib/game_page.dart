@@ -336,7 +336,7 @@ class _GamePageState extends State<GamePage> {
   void updateGameDifficulty() {
     if (widget.gameMode == 'Infinite' && score >= 20 && !isTimeUp) {
       // Start a timer for Infinite mode after score reaches 20
-      if (timer == null || !timer.isActive) {
+      if (!timer.isActive) {
         timeRemaining = 30; // Give 30 seconds
         timer = Timer.periodic(const Duration(seconds: 1), (Timer t) {
           setState(() {
